@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calista.mx - Próximamente</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #000;
+            background: url('https://source.unsplash.com/1600x900/?puerto-vallarta') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 221, 0, 0.5);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        #countdown {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Calista.mx - ¡Próximamente!</h1>
+        <p>Estamos preparando algo increíble para ti.</p>
+        <div id="countdown"></div>
+    </div>
+    <script>
+        function countdownTimer() {
+            const launchDate = new Date('2025-03-01T00:00:00').getTime();
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = launchDate - now;
+                
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdown').innerHTML = '¡Estamos en vivo!';
+                    return;
+                }
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+        countdownTimer();
+    </script>
+</body>
+</html>
